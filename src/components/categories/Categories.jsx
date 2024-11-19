@@ -2,7 +2,6 @@ import './categories.scss'
 import CategoryItem from '../category-item/category-item.component'
 
 const Categories = ({ categories }) => {
-	console.log(categories)
   return (
     <div className='categories-container'>
 			{ categories.map((category) => (
