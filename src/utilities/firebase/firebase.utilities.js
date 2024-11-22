@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 const firebaseConfig = {
   apiKey: "AIzaSyB4CsGTcLzAv-Utg5c58wkhP77kWobgLA8",
@@ -59,10 +59,13 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 	try {
 		const auth = getAuth();
 		const response = await signInWithEmailAndPassword(auth, email, password);
-		console.log("Response:", response);
 		return response;
   	} catch (error) {
 			console.error("Error during sign-in:", error);
 			throw error;
   }
 }
+
+export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
